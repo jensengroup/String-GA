@@ -3,10 +3,10 @@ from rdkit import Chem
 import string_crossover as co
 import scoring_functions as sc
 
-def logP_score(string,dummy):
+def logP_max(string,dummy):
     mol = co.string2mol(string)
-    score = sc.logP_score(mol,dummy)
-    return score
+    score = sc.logP_score(mol)
+    return max(0,score)
 
 def rediscovery(string,args):
     mol = co.string2mol(string)
@@ -28,6 +28,6 @@ if __name__ == "__main__":
     target = Chem.MolFromSmiles(Celecoxib)
     co.string_type = 'smiles'
     string = 'CCCCCCCC'
-    score = logP_score(string,[])
+    score = logP_max(string,[])
     score = rediscovery(string,[target])
     print(score)
