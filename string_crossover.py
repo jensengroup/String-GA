@@ -92,7 +92,7 @@ def string2smiles(string):
     if string_type == 'deepsmiles':
         try:
             smiles = converter.decode(string)
-        except deepsmiles.DecodeError as e:
+        except:
             return None
 
     return smiles
@@ -111,7 +111,7 @@ def string2mol(string):
     if string_type == 'deepsmiles':
         try:
             smiles = converter.decode(string)
-        except deepsmiles.DecodeError as e:
+        except:
             return None
 
     try:
