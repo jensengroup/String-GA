@@ -21,7 +21,8 @@ mutation_rate = 0.01
 co.average_size = 39.15
 co.size_stdev = 3.50
 co.string_type = 'smiles'
-scoring_function = sc.logP_score
+scoring_function = sc.logP_max
+prune_population = True
 max_score = 9999.
 scoring_args = []
 n_cpus = 2
@@ -35,7 +36,9 @@ print('generations', generations)
 print('mutation_rate', mutation_rate)
 print('max_score', max_score)
 print('average_size/size_stdev', co.average_size, co.size_stdev)
+print('string type', co.string_type)
 print('initial pool', file_name)
+print('prune_population', prune_population)
 print('number of tries', n_tries)
 print('number of CPUs', n_cpus)
 print('')
@@ -45,12 +48,13 @@ size = []
 t0 = time.time()
 all_scores = []
 generations_list = []
-args = n_tries*[[population_size, file_name,scoring_function,generations,mating_pool_size,mutation_rate,scoring_args, max_score]]
+args = n_tries*[[population_size, file_name,scoring_function,generations,
+     mating_pool_size,mutation_rate,scoring_args, max_score, prune_population]]
 with Pool(n_cpus) as pool:
     output = pool.map(ga.GA, args)
 
 for i in range(n_tries):     
-    #(scores, population) = ga.GA([population_size, file_name,scoring_function,generations,mating_pool_size,mutation_rate,scoring_args])
+    #(scores, population) = ga.GA([population_size, file_name,scoring_function,generations,mating_pool_size,mutation_rate,scoring_args,max_score,prune_population])
     (scores, population, generation) = output[i]
     all_scores.append(scores)
     print(f'{i} {scores[0]:.2f} {co.string2smiles(population[0])} {generation}')
