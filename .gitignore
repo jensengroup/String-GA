@@ -1,3 +1,9 @@
+#local
+*.out
+*.err
+*.tmp
+submit
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

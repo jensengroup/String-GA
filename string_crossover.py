@@ -36,7 +36,7 @@ def cut_point(parent):
   return m
 
 def string2list(string):
-    if string_type == 'selfies':
+    if string_type == 'SELFIES':
         return string.split('][')
     else:
         return list(string)
@@ -44,17 +44,17 @@ def string2list(string):
 def mol2string(mol):
     smiles = Chem.MolToSmiles(mol)
 
-    if string_type == 'selfies':
+    if string_type == 'SELFIES':
         return encoder(smiles).split('][')
 
-    if string_type == 'deepsmiles':
+    if string_type == 'DeepSMILES':
         string = converter.encode(smiles)
         return list(string)
     
     return list(smiles)
 
 def list2string(list):
-    if string_type == 'selfies':
+    if string_type == 'SELFIES':
         string = ']['.join(list)
     else:
         string = ''.join(list)
@@ -62,16 +62,16 @@ def list2string(list):
     return string
 
 def smiles2string(smiles):
-    if string_type == 'smiles':
+    if string_type == 'SMILES':
         string = smiles
 
-    if string_type == 'selfies':
+    if string_type == 'SELFIES':
         try:
             string = encoder(smiles,PrintErrorMessage=False)
         except:
             return None
 
-    if string_type == 'deepsmiles':
+    if string_type == 'DeepSMILES':
         try:
             string = converter.encode(smiles)
         except deepsmiles.DecodeError as e:
@@ -80,16 +80,16 @@ def smiles2string(smiles):
     return string
 
 def string2smiles(string):
-    if string_type == 'smiles':
+    if string_type == 'SMILES':
         smiles = string
 
-    if string_type == 'selfies':
+    if string_type == 'SELFIES':
         try:
             smiles = decoder(string,PrintErrorMessage=False)
         except:
             return None
 
-    if string_type == 'deepsmiles':
+    if string_type == 'DeepSMILES':
         try:
             smiles = converter.decode(string)
         except:
@@ -99,20 +99,9 @@ def string2smiles(string):
 
 
 def string2mol(string):
-    if string_type == 'selfies':
-        try:
-            smiles = decoder(string,PrintErrorMessage=False)
-        except:
-            return None
-    
-    if string_type == 'smiles':
-        smiles = string
-
-    if string_type == 'deepsmiles':
-        try:
-            smiles = converter.decode(string)
-        except:
-            return None
+    smiles = string2smiles(string)
+    if smiles == None:
+        return None
 
     try:
         mol = Chem.MolFromSmiles(smiles)
@@ -137,7 +126,7 @@ def crossover(parent_a,parent_b):
 if __name__ == "__main__":
     average_size = 39.15
     size_stdev = 3.50
-    string_type = 'selfies'
+    string_type = 'SELFIES'
     parent_a = 'CCCCCCCC'
     parent_b = 'OCCCCCCO'
     #parent_b = 'OCCCCCCc1ccccc1'
