@@ -4,8 +4,8 @@ Dependencies: RDKit, [DeepSMILES](https://github.com/nextmovesoftware/deepsmiles
 
 Example
 
-'''
+```
 python GA_logP_smiles.py xxx.smi
-'''
+```
 
 where xxx.smi is list of SMILES strings from which the initial population will be drawn.
