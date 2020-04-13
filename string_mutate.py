@@ -13,16 +13,16 @@ from rdkit import rdBase
 rdBase.DisableLog('rdApp.error')
 
 def get_symbols():
-    if co.string_type == 'smiles':
+    if co.string_type == 'SMILES':
         symbols = ['C', 'O', '(', '=', ')', '[C@@H]', '[C@H]', 'H', '1', 'N', '2', '3', 'F', 'S', 
                     'Cl', '#', '+', '-', '/', '4', 'B', 'Br', '\\', '5', 'I']
     
-    if co.string_type == 'deepsmiles':
+    if co.string_type == 'DeepSMILES':
         symbols = ['C', 'N', ')', 'S', '=', 'O', '6', '5', '9', 'B', 'Br', '[C@@H]', '[C@H]', 'H', 
                     '+', '%10', '%11', '%12', '%13', '%14', '%15', '%16', '%17', '1', '0', '2', 'l',
                     '3', 'F', '#', '7', 'I', '-', '/', '\\', '4', '8']
     
-    if co.string_type == 'selfies':
+    if co.string_type == 'SELFIES':
         symbols = ['C', 'Branch1_2', 'epsilon', 'Branch1_3', '=C', 'O', '#N', '=O', 'N', 'Ring1', 
                'Branch1_1', 'F', '=N', '#C', 'C@@H', 'S', 'Branch2_2', 'Ring2', 'Branch2_3', 
                'Branch2_1', 'Cl', 'O-', 'C@H', 'NH+', 'C@', 'Br', '/C', '/O', 'NH3+', '=S', 'NH2+', 
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     co.average_size = 39.15
     co.size_stdev = 3.50
     mutation_rate = 1.0
-    co.string_type = 'smiles'
+    co.string_type = 'SMILES'
     string = 'CCC(CCCC)C'
     child = mutate(string,mutation_rate)
     print(child)

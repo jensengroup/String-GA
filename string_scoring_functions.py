@@ -8,9 +8,19 @@ def logP_max(string,dummy):
     score = sc.logP_score(mol)
     return max(0,score)
 
+def logP_target(string,args):
+    mol = co.string2mol(string)
+    score = sc.logP_target(mol,args)
+    return score
+
 def rediscovery(string,args):
     mol = co.string2mol(string)
     score = sc.rediscovery(mol,args)
+    return score
+
+def absorbance_target(string,args):
+    mol = co.string2mol(string)
+    score = sc.absorbance_target(mol,args)
     return score
 
 def calculate_scores(population,function,scoring_args):
